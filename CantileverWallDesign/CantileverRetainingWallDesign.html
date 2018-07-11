@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html ng-app="crwdCalculator" ng-controller= "Controller">
+<head>
+	<title>RetainingWallDesign</title>
+	<script src="jsfiles/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="CSS/CantileverRetainingWallDesign.css">
+	<script src="jsfiles/CantileverRetainingWallDesign.js"></script>
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
+</head>
+<body>
+	<div>
+		<p ng-init = "image = 'images/CantilevelRetainingWallImage.jpg'">
+		<h1>Cantilever Retaining Wall Design</h1>
+
+		<table>
+			
+			<img id="img1" ng-src="{{image}}"/>
+			<h3>Input Parameters</h3>
+			<tr>
+				<td>
+					<h3>Soil Parameters</h3>
+				</td>
+				<td>
+					<h3>Retaining Wall Parameters</h3>
+				</td>
+				<td>
+					<h3>Soil Behind Retaining Wall</h3>
+				</td>
+				<td>
+					<h3>Soil in Front and Below the Retaining Wall</h3>
+				</td>
+			</tr>
+			<tr>
+				<td>Soil Height1: </td>
+				<td>Top Width Area1:</td>
+				<td>Width Area4: </td>
+				<td>Height Soil in Front of Wall: </td>
+			</tr>
+			<tr>
+				<td><input type="number" ng-model="height.h1" placeHolder="H1 in feet"></td>
+				<td><input type="number" ng-model="widthArea1.wA1" placeholder="wA1 in feet"></td>
+				<td><input type="number" ng-model="widthArea4.wA4" placeholder="wA4 in feet"></td>
+				<td><input type="number" ng-model="height.h4" placeholder="D in feet"></td>
+			</tr>
+			<tr>
+				<td>Soil Height2: </td>
+				<td>Bottom width Area2: </td>
+				<td>Angle Area5: </td>
+				<td>Soil2 Density: </td>
+			</tr>
+			<tr>
+				<td><input type="number" ng-model="height.h2" placeHolder="H2 in feet"></td>
+				<td><input type="number" ng-model="widthArea2.wA2" placeholder="wA2 in feet"></td>
+				<td><input type="number" ng-model="angleArea5.aA5" placeholder="0 =< &#945 =< 25 deg"></td>
+				<td><input type="number" ng-model="sDensity2" placeholder="&#947 2 in lb/cu.ft"></td>
+			</tr>
+			<tr>
+				<td>Soil Height3: </td>
+				<td>Total Width Area3: </td>
+				<td></td>
+				<td>Soil2 Cohesion: </td>
+			</tr>
+			<tr>
+				<td><input type="number" ng-model="height.h3" placeHolder="H3 in feet"></td>
+				<td><input type="number" ng-model="widthArea3.wA3" placeholder="wA3 in feet"</td>
+				<td></td>
+				<td><input type="number" ng-model="sCohesion2" placeholder="C2 in lb/sq.ft"></td>
+			</tr>
+			<tr>
+				<td>Soil1 Density: </td>
+				<td>Wall Density: </td>
+				<td></td>
+				<td>Soil2 Friction Angle: </td>
+			</tr>
+			<tr>
+				<td><input type="number" ng-model="sDensity1" placeholder="&#947 1 in lb/cu.ft"></td>
+				<td><input type="number" ng-model="wDensity" placeholder="&#947 2 in lb/cu.ft ~150"></td>
+				<td></td>
+				<td><input type="number" ng-model="sFriction2" placeholder="&#934 2 in degrees "></td>
+			</tr>
+			<tr>
+				<td>Soil1 Cohesion: </td>
+			</tr>
+			<tr>
+				<td><input type="number" ng-model="sCohesion1" placeholder="C1 in lb/sq.ft"></td>
+			</tr>
+			<tr>
+				<td>Soil1 Friction Angle: </td>
+			</tr>
+			<tr>
+				<td><input type="number" ng-model="sFriction1" placeholder="28 =< &#934 1 =< 40 deg"></td>
+			</tr>
+		</table>
+		<hr>
+		
+		<table>
+			<h3>Height and Rankin Active Pressure Results</h3>
+			<tr>
+				<td><h4>Total Height is H  </h4></td>
+				<td><h4>Rankin Active Pressure is Pa  </h4></td>
+				<td><h4>Rankin Vertical Pressure is Pv  </h4></td>
+				<td><h4>Rankin Horizontal Pressure is Ph  </h4></td>
+			</tr>
+			<tr>
+				<td>{{sumHeight()}}</td>
+				<td>{{rankinActivePressure()}}</td>
+				<td>{{rankinVerticalPressure()}} </td>
+				<td>{{rankinHorizontalPressure()}} </td>
+		</table>
+		<hr>
+		<h3>Sum of Resisting Moments & Pressures</h3>
+		<table>
+			<tr>
+				<td><h4>Section No.</h4></td>
+				<td><h4>Area (sq.ft)</h4></td>
+				<td><h4>Weght/Unit Length (lb/cu.ft)</h4></td>
+				<td><h4>Moment Arm Point C (ft)</h4></td>
+				<td><h4>Moment (lb-ft/ft)</h4></td>
+			</tr>
+			<tr>
+				<td><h4>1</h4></td>
+				<td>{{area1()}}</td>
+				<td>{{weightPUnitLength1()}}</td>
+				<td>{{momentArm1()}}</td>
+				<td>{{moment1()}}</td>
+			</tr>
+			<tr>
+				<td><h4>2</h4></td>
+				<td>{{area2()}}</td>
+				<td>{{weightPUnitLength2()}}</td>
+				<td>{{momentArm2()}}</td>
+				<td>{{moment2()}}</td>
+			</tr>
+			<tr>
+				<td><h4>3</h4></td>
+				<td>{{area3()}}</td>
+				<td>{{weightPUnitLength3()}}</td>
+				<td>{{momentArm3()}}</td>
+				<td>{{moment3()}}</td>
+			</tr>
+			<tr>
+				<td><h4>4</h4></td>
+				<td>{{area4()}}</td>
+				<td>{{weightPUnitLength4()}}</td>
+				<td>{{momentArm4()}}</td>
+				<td>{{moment4()}}</td>
+			</tr>
+			<tr>
+				<td><h4>5</h4></td>
+				<td>{{area5()}}</td>
+				<td>{{weightPUnitLength5()}}</td>
+				<td>{{momentArm5()}}</td>
+				<td>{{moment5()}}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>Pv = {{rankinVerticalPressure()}}</td>
+				<td>{{widthArea3.wA3}}</td>
+				<td>Mv = {{momentByPv()}}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>&#931V = {{sumRankinVerticalPressure()}}</td>
+				<td></td>
+				<td>&#931Mr = {{sumMoment()}}</td>
+			</tr>
+		</table>
+		<h3>Overturning Moment Mo = </h3><h2>{{overturningMoment()}} lb</h2>
+		<hr>
+		<table id="factorSafetyTable">
+			<h3>Factor of Safety Against Overturning, Sliding, & Bearing Capacity Failure</h3>
+			<tr>
+				<td>Overturning Factor of Safety = {{overturningFacotrSafety()}}</td>
+			</tr>
+			<tr>
+				<td>Sliding Factor of Safety = {{slidingFactorSafety()}}</td>
+			</tr>
+			<tr>
+				<td>Bearing Capacity Factor of Safety = {{bearingCapacityFactorSafety()}}</td>
+			</tr>
+		</table>
+		<hr>
+	</div>
+</body>
+</html>
